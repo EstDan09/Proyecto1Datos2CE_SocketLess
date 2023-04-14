@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Background.h"
 #include "Player.h"
-#include ""
+#include "InGame.h"
 #include "Bullet.h"
+#include "ShipPlayer.h"
 #include "Enemy.h"
 #include "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
 #include "raymath.h"
@@ -15,7 +16,7 @@
 using namespace std;
 
 
-int lives = 10;
+int lives = 1;
 int fase1Con = 0;
 int bulletsLeft = 300;
 int bulletsCLeft = 0;
@@ -73,11 +74,15 @@ int main(int argc, const char * argv[])
     //------------------------------
 
     //ObjetosCool
+    auto* inGame = new InGame();
+    inGame->changeDifficulty(1);
+    auto* shipPlayer = new ShipPlayer(20);
+    shipPlayer->ammunation->insertBullets(300);
 
     //------------------------------
     auto* player = new Player (&shipUsableImage, raylib::Rectangle(40,8, 8,8),
                    raylib::Rectangle(100,GetScreenHeight()/2,64,64), 200.0f,
-                   &bulletUsableImage, 1.0f);
+                   &bulletUsableImage, 2.0f);
 
     auto* enemy1 = new Enemy(&shipUsableImage, raylib::Rectangle(40,48,8,8),
                 raylib::Rectangle(GetScreenWidth()-70, 200, 64,64), 200.0f,
@@ -198,10 +203,12 @@ int main(int argc, const char * argv[])
                 player->getOutClipB1();
 
                 if (lives <= 0){
-                    currentScreen = MENU;
+                    currentScreen = F2;
                 }
 
                 //Colisiones
+
+                    //BulletsOutOfBounds
                 if (player->getOutClipB1().x > 1470 && player->getOutClipB1().y < 1000){
                     bulletsLeft -= 1;
                     player->setOutClipB1(raylib::Rectangle(0,1100, 32,32));
@@ -222,15 +229,22 @@ int main(int argc, const char * argv[])
                     player->setOutClipB4(raylib::Rectangle(0,1100, 32,32));
                 }
 
+                    //Colision entre naves
                 if (CheckCollisionRecs(player->getOutClip(), enemy1->getOutclip())
                 || CheckCollisionRecs(player->getOutClip(), enemy2->getOutclip())
                 || CheckCollisionRecs(player->getOutClip(), enemy3->getOutclip())
                 || CheckCollisionRecs(player->getOutClip(), enemy4->getOutclip())){
 
-
-                    player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-                    lives --;
-
+                    shipPlayer->setVida((shipPlayer->getVida())-(inGame->getCurrentWave()->getGenDamage()));
+                    if (shipPlayer->getVida() > 0){
+                        player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
+                        cout << shipPlayer->getVida() << endl;
+                    }
+                    else{
+                        player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
+                        lives --;
+                        shipPlayer->setVida(20);
+                    }
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB1(), enemy1->getOutclip())){
@@ -549,11 +563,12 @@ int main(int argc, const char * argv[])
 //                    }
                 }
 
-//                if (recibido == "false"){
-//                    player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                    lives --;
-//                    sleep(1);
-//                }
+
+                if (lives < 0) {
+                    currentScreen = F2;
+                }
+
+
 
 
 
@@ -593,14 +608,23 @@ int main(int argc, const char * argv[])
                 enemy2->Draw();
                 enemy3->Draw();
                 enemy4->Draw();
+
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);
                 string bulletCounter = firstTextB + secondtextB;
                 DrawText(bulletCounter.c_str(), 0,0,30, GREEN);
+
                 string firstTextBC = "Bulletin the Kollector: ";
                 string secondtextBC = to_string(bulletsCLeft);
                 string bulletCCounter = firstTextBC + secondtextBC;
                 DrawText(bulletCCounter.c_str(), 300,0,30, GREEN);
+
+                string firstTextBC = "Lives: ";
+                string secondtextBC = to_string(bulletsCLeft);
+                string bulletCCounter = firstTextBC + secondtextBC;
+                DrawText(bulletCCounter.c_str(), 300,0,30, GREEN);
+
+
             }
             break;
 
