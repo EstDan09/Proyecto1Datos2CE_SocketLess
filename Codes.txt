@@ -1,0 +1,5 @@
+Poderes
+RATATATA = 73616c636869
+¿O Corona? = 6d6f6e61636f
+Curacao = 6d65737369
+Amor y Paz = 6c616e676f737461
