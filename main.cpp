@@ -1,22 +1,19 @@
 #include <iostream>
-#include <sys/types.h>
+#include "Background.h"
+#include "Player.h"
+#include ""
+#include "Bullet.h"
+#include "Enemy.h"
+#include "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
+#include "raymath.h"
+
 #include <unistd.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <arpa/inet.h>
 #include <string.h>
 #include <string>
 #include "raylib.h"
 #define NUM_FRAMES 1 //recorte
-#include "raymath.h"
 using namespace std;
 
-#include "Background.h"
-#include "Player.h"
-#include "Bullet.h"
-#include "Enemy.h"
-
-#include "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
 
 int lives = 10;
 int fase1Con = 0;
@@ -76,6 +73,7 @@ int main(int argc, const char * argv[])
     //------------------------------
 
     //Objetos
+
     //------------------------------
     auto* player = new Player (&shipUsableImage, raylib::Rectangle(40,8, 8,8),
                    raylib::Rectangle(100,GetScreenHeight()/2,64,64), 200.0f,
@@ -266,8 +264,6 @@ int main(int argc, const char * argv[])
                     enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
                 }
 
-                }
-
                 if (CheckCollisionRecs(player->getOutClipB1(), enemy3->getOutclip())){
                     bulletsLeft -= 1;
 
@@ -276,8 +272,7 @@ int main(int argc, const char * argv[])
 
                     enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
 
-                        string message = "E";
-                        int sendRes = send(sock, message.c_str(), message.size() + 1, 0);
+
 
 //                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
 //                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
@@ -554,16 +549,11 @@ int main(int argc, const char * argv[])
 //                    }
                 }
 
-                string message = "W";
-                int sendRes = send(sock, message.c_str(), message.size() + 1, 0);
-
-                int bytesReceived = recv(sock, buf, 4096, 0);
-                string recibido = string(buf, 0, bytesReceived);
-                if (recibido == "false"){
-                    player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-                    lives --;
-                    sleep(1);
-                }
+//                if (recibido == "false"){
+//                    player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
+//                    lives --;
+//                    sleep(1);
+//                }
 
 
 
@@ -630,31 +620,6 @@ int main(int argc, const char * argv[])
         }
         EndDrawing();
 
-        //		Enter lines of text
-
-
-        //		Send to server
-        int sendRes = send(sock, userInput.c_str(), userInput.size() + 1, 0);
-        if (sendRes == -1)
-        {
-            cout << "Could not send to server! Whoops!\r\n";
-            continue;
-        }
-
-        //		Wait for response
-        memset(buf, 0, 4096);
-        int bytesReceived = recv(sock, buf, 4096, 0);
-        if (bytesReceived == -1)
-        {
-            cout << "There was an error getting response from server\r\n";
-        }
-
-
-        else
-        {
-            //		Display response
-            cout << string(buf, 0, bytesReceived) << "\r\n";
-        }
     };
     UnloadTexture(startButton);  // Unload button texture
     UnloadSound(fxButton);  // Unload sound
@@ -662,7 +627,6 @@ int main(int argc, const char * argv[])
     CloseAudioDevice();     // Close audio device
 
     CloseWindow();
-    close(sock);
 
 
 }
