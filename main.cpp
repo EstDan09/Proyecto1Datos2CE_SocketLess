@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
     raylib::Texture backgroundImageMenu = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgMenu.png");
     //------------------------------
 
-    //Objetos
+    //ObjetosCool
 
     //------------------------------
     auto* player = new Player (&shipUsableImage, raylib::Rectangle(40,8, 8,8),
