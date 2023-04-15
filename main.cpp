@@ -52,9 +52,18 @@ int main(int argc, const char * argv[])
 
     //Imagenes
     //------------------------------
-    Image startButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/start.png");
-    ImageResize(&startButtonImage, 350, 200);
+    Image startButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/normal.png");
+    ImageResize(&startButtonImage, 375, 225);
     Texture2D startButton = LoadTextureFromImage(startButtonImage);
+
+    Image startEasyButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/easy.png");
+    ImageResize(&startEasyButtonImage, 350, 200);
+    Texture2D startEasyButton = LoadTextureFromImage(startEasyButtonImage);
+
+    Image startHardButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/hard.png");
+    ImageResize(&startHardButtonImage, 350, 200);
+    Texture2D startHardButton = LoadTextureFromImage(startHardButtonImage);
+
 
     Image settingsButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/settings.png");
     ImageResize(&settingsButtonImage, 100, 100);
@@ -132,9 +141,19 @@ int main(int argc, const char * argv[])
     //------------------------------
     float frameHeightStart = (float)startButton.height/NUM_FRAMES; //390
     Rectangle sourceRecStart = {0,0, (float)startButton.width, frameHeightStart};
-
     Rectangle startBottonBounds = { screenWidth/2.0f - startButton.width/2.0f, screenHeight/2.0f - startButton.height/NUM_FRAMES/2.0f,
                             (float)startButton.width, frameHeightStart};
+
+    float frameHeightStartEasy = (float)startEasyButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecStartEasy = {0,0, (float)startEasyButton.width, frameHeightStartEasy};
+    Rectangle startEasyBottonBounds = { screenWidth/2.0f - startEasyButton.width/2.0f, (screenHeight/2.0f) - 310,
+                                    (float)startEasyButton.width, frameHeightStartEasy};
+
+    float frameHeightStartHard = (float)startHardButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecStartHard = {0,0, (float)startHardButton.width, frameHeightStartHard};
+    Rectangle startHardBottonBounds = { screenWidth/2.0f - startHardButton.width/2.0f, (screenHeight/2.0f) + 100,
+                                        (float)startHardButton.width, frameHeightStartHard};
+
     //------------------------------
 
     //Parametros del boton Settings
@@ -149,8 +168,9 @@ int main(int argc, const char * argv[])
 
     //Variables que voy a usar
     //------------------------------
-    int startButtonState = 0;
     bool startButtonAction = false;
+    bool startButtonActionEasy = false;
+    bool startButtonActionHard = false;
     int framesCounter = 0;
 
     SetTargetFPS(60);
@@ -169,27 +189,44 @@ int main(int argc, const char * argv[])
             case MENU:{
 
                 mousePoint = GetMousePosition();
+                startButtonActionEasy = false;
                 startButtonAction = false;
+                startButtonActionHard = false;
+
+                if (CheckCollisionPointRec(mousePoint, startEasyBottonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        startButtonActionEasy = true;
+                    }
+                }
+                if (startButtonActionEasy) {
+                    //PlaySound(fxButton);
+                    currentScreen = F1;
+                    lives = 10;
+                    inGame->changeDifficulty(1);
+                }
 
                 if (CheckCollisionPointRec(mousePoint, startBottonBounds)) {
-                    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                        startButtonState = 2 ;
-                    }
-                    else {
-                        startButtonState = 1;
-                    }
                     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
                         startButtonAction = true;
                     }
                 }
-                else {
-                    startButtonState = 1;
-                }
                 if (startButtonAction) {
                     //PlaySound(fxButton);
                     currentScreen = F1;
-                    lives = 22;
+                    lives = 5;
+                    inGame->changeDifficulty(2);
+                }
 
+                if (CheckCollisionPointRec(mousePoint, startHardBottonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        startButtonActionHard = true;
+                    }
+                }
+                if (startButtonActionHard) {
+                    //PlaySound(fxButton);
+                    currentScreen = F1;
+                    lives = 1;
+                    inGame->changeDifficulty(3);
                 }
             }
             break;
@@ -202,12 +239,10 @@ int main(int argc, const char * argv[])
                 enemy3->Update();
                 enemy4->Update();
                 player->getOutClipB1();
-                //cout << shipPlayer->ammunation->getDamage() <<  endl;
 
-                //cout << bulletsLeft << " " << shipPlayer->ammunation->getQuantity() << endl;
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
-                    currentScreen = F2;
+                    currentScreen = MENU;
                 }
 
                 if (bulletsLeft == 0 and bulletsCLeft == 0){
@@ -629,16 +664,6 @@ int main(int argc, const char * argv[])
                         shipPlayer->setVida(20);
                     }
                 }
-
-
-                if (lives < 0) {
-                    currentScreen = F2;
-                }
-
-
-
-
-
             }
             break;
 
@@ -662,7 +687,9 @@ int main(int argc, const char * argv[])
         switch(currentScreen){
             case MENU:{
                 backgroundMenu->Draw();
+                DrawTextureRec(startEasyButton, sourceRecStartEasy,(Vector2){ startEasyBottonBounds.x, startEasyBottonBounds.y }, WHITE );
                 DrawTextureRec(startButton, sourceRecStart, (Vector2){ startBottonBounds.x, startBottonBounds.y }, WHITE); // Draw button frame
+                DrawTextureRec(startHardButton, sourceRecStartHard,(Vector2){ startHardBottonBounds.x, startHardBottonBounds.y }, WHITE );
                 DrawTextureRec(settingsButton, sourceRecSettings, (Vector2){settingButtonBounds.x, settingButtonBounds.y}, WHITE);
             }
             break;
