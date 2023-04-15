@@ -78,16 +78,12 @@ void Ammunation::impact(){
     if ( head->getNextPtr() == nullptr){
         head = nullptr;
         quantity--;
-        cout << "f - impact1" << endl;
-
     }
     else{
         BulletD* tmp2 = head;
         head = tmp2->next;
         quantity--;
         delete tmp2;
-        cout << "f - impact2" << endl;
-
     }
 }
 
