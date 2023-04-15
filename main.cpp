@@ -77,7 +77,8 @@ int main(int argc, const char * argv[])
     auto* inGame = new InGame();
     inGame->changeDifficulty(1);
     auto* shipPlayer = new ShipPlayer(20);
-    shipPlayer->ammunation->insertBullets(4);
+    shipPlayer->ammunation->insertBullets(50);
+    shipPlayer->ammunation->setDamage(10);
 
     //------------------------------
     auto* player = new Player (&shipUsableImage, raylib::Rectangle(40,8, 8,8),
@@ -201,9 +202,10 @@ int main(int argc, const char * argv[])
                 enemy3->Update();
                 enemy4->Update();
                 player->getOutClipB1();
+                //cout << shipPlayer->ammunation->getDamage() <<  endl;
 
-                cout << bulletsLeft << " " << shipPlayer->ammunation->getQuantity() << endl;
-
+                //cout << bulletsLeft << " " << shipPlayer->ammunation->getQuantity() << endl;
+                bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
                     currentScreen = F2;
                 }
@@ -295,30 +297,19 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        cout << inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage()) << endl;
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
                             enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     player->setOutClipB1(raylib::Rectangle(0,1100, 32,32));
-
-                    //player->setOutClipB1(raylib::Rectangle(0,1100, 32,32));
-
-                    //if ()
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
-//                        }
-//                    }
 
                 }
 
@@ -327,14 +318,16 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        cout << inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage()) << endl;
+
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
                             enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
@@ -346,29 +339,18 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
                             enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     player->setOutClipB1(raylib::Rectangle(0,1100, 32,32));
-
-
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
-
-
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB1(), enemy4->getOutclip())){
@@ -376,27 +358,18 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
                             enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     player->setOutClipB1(raylib::Rectangle(0,1100, 32,32));
-
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
-
 
                 }
 
@@ -405,26 +378,18 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
                             enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     player->setOutClipB2(raylib::Rectangle(0,1100, 32,32));
-
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
 
                 }
 
@@ -433,94 +398,97 @@ int main(int argc, const char * argv[])
                     if (bulletsLeft > 0){
                         bulletsLeft -= 1;
                         shipPlayer->ammunation->impact();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
                             enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     if (bulletsLeft == 0 and bulletsCLeft != 0){
                         bulletsCLeft -=1;
                         shipPlayer->ammunation->bulletCollector->deleteF();
-                        if (inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
                             enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
                         }
                     }
                     player->setOutClipB2(raylib::Rectangle(0,1100, 32,32));
 
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
-
-
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB2(), enemy3->getOutclip())){
-                    bulletsLeft -= 1;
 
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
                     player->setOutClipB2(raylib::Rectangle(0,1100, 32,32));
-
-
-                    enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
 
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB2(), enemy4->getOutclip())){
-                    bulletsLeft -= 1;
 
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
                     player->setOutClipB2(raylib::Rectangle(0,1100, 32,32));
-
-
-                    enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
-
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB3(), enemy1->getOutclip())){
-                    bulletsLeft -= 1;
-
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
                     player->setOutClipB3(raylib::Rectangle(0,1100, 32,32));
-
-
-                        enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
 
 
                 }
 
                 if (CheckCollisionRecs(player->getOutClipB3(), enemy2->getOutclip())){
-                    bulletsLeft -= 1;
-
+                    
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                        }
+                    }
                     player->setOutClipB3(raylib::Rectangle(0,1100, 32,32));
-
-                        enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
-
-//                            enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, GetScreenHeight()/2, 64,64));
-//                            enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 700, 64,64));
-//                            enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 790, 64,64));
-//                            enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
-//                            player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
-//                            currentScreen = F2;
 
                 }
 
