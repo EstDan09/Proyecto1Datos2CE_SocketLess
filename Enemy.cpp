@@ -68,3 +68,7 @@ void Enemy::setOutClip(raylib::Rectangle outClipNew) {
 raylib::Rectangle Enemy::getOutclipB() {
     return outClipB;
 }
+
+void Enemy::setOutClipB(raylib::Rectangle outClipNew) {
+    bullet->setOutClip(outClipNew);
+}
