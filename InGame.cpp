@@ -45,7 +45,9 @@ InGame::InGame() {
 }
 
 
+InGame::~InGame() {
 
+}
 
 
 Waves *InGame::getCurrentWave() {
@@ -83,6 +85,9 @@ bool InGame::checkNextW() {
         if(tmp->isAlive()==true){
             value = false;
             break;
+        }
+        else{
+            tmp = tmp->getNextEnemy();
         }
     }
     if(value){
