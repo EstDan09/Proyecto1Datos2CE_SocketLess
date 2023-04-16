@@ -87,7 +87,7 @@ int main(int argc, const char * argv[])
     //Objetos DATA
     auto* inGame = new InGame();
     inGame->changeDifficulty(1);
-    auto* shipPlayer = new ShipPlayer(1);
+    auto* shipPlayer = new ShipPlayer(100);
     shipPlayer->ammunation->insertBullets(50);
     shipPlayer->ammunation->setDamage(55);
 
@@ -745,7 +745,7 @@ int main(int argc, const char * argv[])
                     }
                 }
 
-                if (lives == 4){
+                if (inGame->checkNextW()){
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
                     enemy1->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
