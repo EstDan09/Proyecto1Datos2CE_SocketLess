@@ -5,7 +5,7 @@
 #include "Bullet.h"
 #include "ShipPlayer.h"
 #include "Enemy.h"
-#include "/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
+#include "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
 #include "raymath.h"
 #include "Strategys.h"
 #include <boost/asio.hpp>
@@ -37,8 +37,6 @@ typedef enum GameScreen {MENU = 0, F1, F6, F11} GameScreen;
 
 int main(int argc, const char * argv[])
 {
-    Strategys* strategys = new Strategys();
-    cout<<strategys->activateP(2,70,20,10,100)<<endl;
     //Variables para la ventana
     //-----------------------------
     const int screenWidth = 1500;
@@ -56,47 +54,47 @@ int main(int argc, const char * argv[])
     //Audio
     //------------------------------
     InitAudioDevice();
-    Sound fxButton = LoadSound("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/one.wav");
+    Sound fxButton = LoadSound("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/one.wav");
     //------------------------------
 
     //Imagenes
     //------------------------------
 
-    Image startButtonImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/normal.png");
+    Image startButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/normal.png");
     ImageResize(&startButtonImage, 375, 225);
     Texture2D startButton = LoadTextureFromImage(startButtonImage);
 
-    Image startEasyButtonImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/easy.png");
+    Image startEasyButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/easy.png");
     ImageResize(&startEasyButtonImage, 350, 200);
     Texture2D startEasyButton = LoadTextureFromImage(startEasyButtonImage);
 
-    Image startHardButtonImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/hard.png");
+    Image startHardButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/hard.png");
     ImageResize(&startHardButtonImage, 350, 200);
     Texture2D startHardButton = LoadTextureFromImage(startHardButtonImage);
 
 
-    Image settingsButtonImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/settings.png");
+    Image settingsButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/settings.png");
     ImageResize(&settingsButtonImage, 100, 100);
     Texture2D settingsButton = LoadTextureFromImage(settingsButtonImage);
 
-    Image shipImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/ships.png");
+    Image shipImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/ships.png");
     raylib::Texture shipUsableImage = LoadTextureFromImage(shipImage);
 
-    Image bulletImage = LoadImage("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/blasts.png");
+    Image bulletImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/blasts.png");
     raylib::Texture bulletUsableImage = LoadTextureFromImage(bulletImage);
 
-    raylib::Texture backgroundImageMenu = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgMenu.png");
-    raylib::Texture backgroundImageF1 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF1.png");
-    raylib::Texture backgroundImageF2 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF2.png");
-    raylib::Texture backgroundImageF3 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF3.png");
-    raylib::Texture backgroundImageF4 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF4.png");
-    raylib::Texture backgroundImageF5 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF5.png");
-    raylib::Texture backgroundImageF6 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF6.png");
-    raylib::Texture backgroundImageF7 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF7.png");
-    raylib::Texture backgroundImageF8 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF8.png");
-    raylib::Texture backgroundImageF9 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF9.png");
-    raylib::Texture backgroundImageF10 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF10.png");
-    raylib::Texture backgroundImageF11 = LoadTexture("/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/bgF11.png");
+    raylib::Texture backgroundImageMenu = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgMenu.png");
+    raylib::Texture backgroundImageF1 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF1.png");
+    raylib::Texture backgroundImageF2 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF2.png");
+    raylib::Texture backgroundImageF3 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF3.png");
+    raylib::Texture backgroundImageF4 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF4.png");
+    raylib::Texture backgroundImageF5 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF5.png");
+    raylib::Texture backgroundImageF6 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF6.png");
+    raylib::Texture backgroundImageF7 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF7.png");
+    raylib::Texture backgroundImageF8 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF8.png");
+    raylib::Texture backgroundImageF9 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF9.png");
+    raylib::Texture backgroundImageF10 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/bgF10.png");
+    raylib::Texture backgroundImageF11 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF11.png");
     //------------------------------
 
     //Objetos DATA
@@ -140,34 +138,12 @@ int main(int argc, const char * argv[])
                                           raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
     auto* backgroundF1 = new Background(&backgroundImageF1,raylib::Rectangle(200,100,1300, 1000),
                                         raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF2 = new Background(&backgroundImageF2,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF3 = new Background(&backgroundImageF3,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF4 = new Background(&backgroundImageF4,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF5 = new Background(&backgroundImageF5,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
     auto* backgroundF6 = new Background(&backgroundImageF6,raylib::Rectangle(200,100,1300, 1000),
                                         raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF7 = new Background(&backgroundImageF7,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF8 = new Background(&backgroundImageF8,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF9 = new Background(&backgroundImageF9,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF10 = new Background(&backgroundImageF10,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
+
     auto* backgroundF11 = new Background(&backgroundImageF11,raylib::Rectangle(200,100,1300, 1000),
                                         raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF12 = new Background(&backgroundImageF12,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF13 = new Background(&backgroundImageF13,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF14 = new Background(&backgroundImageF14,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
-    auto* backgroundF15 = new Background(&backgroundImageF15,raylib::Rectangle(200,100,1300, 1000),
-                                        raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
+
     //------------------------------
     player->setEnemy1(enemy1);
     player->setEnemy2(enemy1);
