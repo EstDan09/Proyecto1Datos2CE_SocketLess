@@ -10,6 +10,8 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "InGame.h"
+#include "ShipPlayer.h"
+#include "Ammunation.h"
 
 #include <boost/asio.hpp>
 
@@ -22,9 +24,11 @@ public:
     Player(raylib::Texture* texture, raylib::Rectangle inClip, raylib::Rectangle outClip, float speed,
            raylib::Texture* textureForBullets, float delay);
     ~Player();
+
     void Event();
     void Update();
     void Draw();
+
     raylib::Rectangle getOutClip();
     raylib::Rectangle getOutClipB1();
     raylib::Rectangle getOutClipB2();
@@ -49,14 +53,32 @@ public:
     void setOutClipB9(raylib::Rectangle outClipNew);
     void setOutClipB10(raylib::Rectangle outClipNew);
 
-    void setEnemy1(Enemy x);
-    void setEnemy2(Enemy x);
-    void setEnemy3(Enemy x);
-    void setEnemy4(Enemy x);
-    void setEnemy5(Enemy x);
-    void setEnemy6(Enemy x);
-    void setEnemy7(Enemy x);
-    void setEnemy8(Enemy x);
+    void setEnemy1(Enemy* x);
+    void setEnemy2(Enemy* x);
+    void setEnemy3(Enemy* x);
+    void setEnemy4(Enemy* x);
+    void setEnemy5(Enemy* x);
+    void setEnemy6(Enemy* x);
+    void setEnemy7(Enemy* x);
+    void setEnemy8(Enemy* x);
+
+    void setInGame(InGame* x);
+
+    void setShipPlayer(ShipPlayer* x);
+
+    void setAmmunation(Ammunation* x);
+
+    void setLives(int x);
+    int getLives();
+
+    void setBulletsLeft(int x);
+    int getBulletsLeft();
+
+    void setBulletsCLeft(int x);
+    int getBulletsCLeft();
+
+
+    void logic1();
 
     void setDelay(float x);
     void ricoMauro();
@@ -83,14 +105,26 @@ private:
     raylib::Rectangle outClipB9;
     raylib::Rectangle outClipB10;
 
-    Enemy enemy1;
-    Enemy enemy2;
-    Enemy enemy3;
-    Enemy enemy4;
-    Enemy enemy5;
-    Enemy enemy6;
-    Enemy enemy7;
-    Enemy enemy8;
+    Enemy* enemy1;
+    Enemy* enemy2;
+    Enemy* enemy3;
+    Enemy* enemy4;
+    Enemy* enemy5;
+    Enemy* enemy6;
+    Enemy* enemy7;
+    Enemy* enemy8;
+
+    InGame* inGame;
+
+    ShipPlayer* shipPlayer;
+
+    Ammunation* ammunation;
+
+    int bulletsLeft;
+
+    int bulletsCLeft;
+
+    int lives;
 
 
 
