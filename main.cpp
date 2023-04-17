@@ -183,6 +183,7 @@ int main(int argc, const char * argv[])
     player->setShipPlayer(shipPlayer);
     //------------------------------
 
+
     //Parametros del boton Start
     //------------------------------
     float frameHeightStart = (float)startButton.height/NUM_FRAMES; //390
@@ -1499,7 +1500,7 @@ int main(int argc, const char * argv[])
                 if (inGame->checkNextW()){
                     wave ++;
                     obj = 0;
-                    currentScreen = F2;
+                    //currentScreen = F2;
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
                     enemy1->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
@@ -1510,6 +1511,10 @@ int main(int argc, const char * argv[])
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
 
+                }
+
+                if (wave > 5) {
+                    currentScreen = F6
                 }
             }
             break;
