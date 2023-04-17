@@ -235,7 +235,7 @@ int main(int argc, const char * argv[])
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
                     obj = 0;
-                    wave = 1;
+                    wave = 4;
                     shipPlayer->ammunation->insertBullets(500);
 
                 }
@@ -260,7 +260,7 @@ int main(int argc, const char * argv[])
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
                     obj = 0;
-                    wave = 1;
+                    wave = 4;
                 }
 
                 if (CheckCollisionPointRec(mousePoint, startHardBottonBounds)) {
@@ -283,7 +283,7 @@ int main(int argc, const char * argv[])
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
                     obj = 0;
-                    wave = 1;
+                    wave = 4;
                 }
             }
             break;
@@ -319,6 +319,33 @@ int main(int argc, const char * argv[])
 
                 }
 
+                if (wave == 4) {
+                    char soundAction = '4';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 3) {
+                    char soundAction = '3';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 2) {
+                    char soundAction = '2';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 1) {
+                    char soundAction = '1';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 0) {
+                    char soundAction = '0';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+
+
                 //Colisiones
 
                     //Enemigo sale bacano
@@ -333,6 +360,8 @@ int main(int argc, const char * argv[])
                     char soundAction = 'S';
                     boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
                 }
+
+
 
 
 
@@ -1472,7 +1501,7 @@ int main(int argc, const char * argv[])
                 }
 
                 if (inGame->checkNextW()){
-                    wave ++;
+                    wave --;
                     obj = 0;
                     //currentScreen = F2;
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
@@ -1487,7 +1516,7 @@ int main(int argc, const char * argv[])
 
                 }
 
-                if (wave > 5) {
+                if (wave < 0) {
                     currentScreen = F6;
                 }
             }
