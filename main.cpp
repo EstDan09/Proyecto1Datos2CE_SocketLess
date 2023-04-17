@@ -7000,6 +7000,804 @@ int main(int argc, const char * argv[])
 
                 }
 
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB5(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB6(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB6(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB6(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB5(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB6(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB6(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB6(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB7(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB7(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB8(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB8(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB9(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy1->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(0, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy1->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy2->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(1, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy2->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy3->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        cout << "tercero" << endl;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(2, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy3->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy4->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(3, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy4->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy5->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(4, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy5->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
+                if (CheckCollisionRecs(player->getOutClipB10(), enemy6->getOutclip())){
+
+                    if (bulletsLeft > 0){
+                        bulletsLeft -= 1;
+                        shipPlayer->ammunation->impact();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    if (bulletsLeft == 0 and bulletsCLeft != 0){
+                        bulletsCLeft -=1;
+                        shipPlayer->ammunation->bulletCollector->deleteF();
+                        if (!inGame->getCurrentWave()->colShip(5, shipPlayer->ammunation->bulletCollector->getDamage())){
+                            enemy6->setOutClip(raylib::Rectangle(5000,2000,64,64));
+                            obj ++;
+                        }
+                    }
+                    player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
+
+                }
+
                 //Colision bala enmeiga-naveJugador
                 if (CheckCollisionRecs(player->getOutClip(), enemy1->getOutclipB())){
 

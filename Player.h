@@ -78,7 +78,7 @@ public:
     int getBulletsCLeft();
 
 
-    void logic1();
+
 
     void setDelay(float x);
     void ricoMauro();
