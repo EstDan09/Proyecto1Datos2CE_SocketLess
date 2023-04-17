@@ -25,7 +25,7 @@ endif()
 
 # Our Project
 
-add_executable(Proyecto1Datos2CE_Cliente main.cpp Entity.cpp Entity.h Background.cpp Background.h Player.cpp Player.h Bullet.cpp Bullet.h Enemy.cpp Enemy.h Declarations.h Ammunation.cpp BulletCollector.cpp BulletD.cpp InGame.cpp ShipEnemy.cpp ShipPlayer.cpp Waves.cpp Strategys.cpp)
+add_executable(Proyecto1Datos2CE_Cliente main.cpp Entity.cpp Entity.h Background.cpp Background.h Player.cpp Player.h Bullet.cpp Bullet.h Enemy.cpp Enemy.h Declarations.h Ammunation.cpp BulletCollector.cpp BulletD.cpp InGame.cpp ShipEnemy.cpp ShipPlayer.cpp Waves.cpp Strategys.cpp InformationNode.cpp InformationNode.h)
 #set(raylib_VERBOSE 1)
 target_link_libraries(Proyecto1Datos2CE_Cliente raylib)
 
@@ -41,3 +41,18 @@ if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
+# Encuentra Doxygen y genera la documentación
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    set(DOXYGEN_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/path/to/your/code)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doc)
+    set(DOXYGEN_PROJECT_NAME "MyProject")
+    set(DOXYGEN_PROJECT_VERSION "1.0")
+    set(DOXYGEN_EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/path/to/examples)
+    set(DOXYGEN_GENERATE_HTML YES)
+    set(DOXYGEN_GENERATE_MAN YES)
+    set(DOXYGEN_GENERATE_LATEX YES)
+    set(DOXYGEN_OUTPUT_FORMAT html latex man)
+    set(DOXYGEN_RECURSIVE YES)
+    doxygen_add_docs(docs ${DOXYGEN_INPUT})
+endif(DOXYGEN_FOUND)
