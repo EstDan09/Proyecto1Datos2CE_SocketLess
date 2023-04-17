@@ -5,8 +5,8 @@
 #ifndef PROYECTO1DATOS2CE_CLIENTE_ENTITY_H
 #define PROYECTO1DATOS2CE_CLIENTE_ENTITY_H
 
-#include "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
-
+#include "/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/assets/raylib-cpp-4.5.0/include/raylib-cpp.hpp"
+#include "assets/raylib-cpp-4.5.0/include/Texture.hpp"
 
 
 class Entity {

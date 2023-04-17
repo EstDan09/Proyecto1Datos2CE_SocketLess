@@ -6,6 +6,7 @@
 #define PROYECTO1DATOS2CE_SERVER_STRATEGYS_H
 #include <iostream>
 #include "Ammunation.h"
+#include "InformationNode.h"
 
 using namespace std;
 
@@ -32,9 +33,7 @@ public:
 
     void setDamageEnemies(int damageEnemies);
 
-    char loadedP[2];
-
-    char unloadedP[2];
+    InformationNode* loadedP[2];
 
     int activateP(char x, int prevHealth, int prevPlayerD, int prevEnemyD, int maxHealth);
 

@@ -15,14 +15,14 @@ using boost::property_tree::ptree;
  * 4 = Amor Y Paz
  */
 Strategys::Strategys() {
-    Strategys::loadedP[0] = 1;
-    Strategys::loadedP[1] = 2;
-    Strategys::unloadedP[0] = 3;
-    Strategys::unloadedP[1] = 4;
-    Strategys::damageincreased = 2;
-    Strategys::shield = 10000000;
+
+    Strategys::loadedP[0] = new InformationNode(0,2);
+    Strategys::loadedP[1] = new InformationNode(1,1000000000);
+    //Strategys::damageincreased = 2;
+    //Strategys::shield = 10000000;
 }
 Strategys::~Strategys() {}
+
 
 int Strategys::getShield() const {
     return shield;
@@ -56,7 +56,7 @@ void Strategys::setDamageEnemies(int damageEnemies) {
     Strategys::damageEnemies = damageEnemies;
 }
 int Strategys::activateP(char x, int prevHealth, int prevPlayerD, int prevEnemyD,  int maxHealth) {
-    if(x==loadedP[0] || x==loadedP[1]){
+    if(x==loadedP[0]->getType() || x==loadedP[1]->getType()){
         return inMemory(x, prevHealth, prevPlayerD, prevEnemyD, maxHealth);
     }
     else{
@@ -79,22 +79,45 @@ int Strategys::deactivateP(char x) {
 }
 int Strategys::inMemory(char x,int prevHealth, int prevPlayerD, int prevEnemyD, int maxHealth) {
     switch (x) {
-        case 1:
+        case 0:
             setAPrevPlayerD(prevPlayerD);
-            return prevPlayerD*getDamageincreased();
-        case 2:
-            setAPrevHealth(prevHealth);
-            return getShield();
-        case 3:
-            if(getHealing()+prevHealth>=maxHealth) {
-                return getHealing();
+            if(loadedP[0]->getType()==0) {
+                return prevPlayerD * loadedP[0]->getData();
             }
             else{
-                return getHealing() + prevHealth;
+                return prevPlayerD * loadedP[1]->getData();
             }
-        case 4:
+        case 1:
+            setAPrevHealth(prevHealth);
+            if(loadedP[0]->getType()==1){
+                return loadedP[0]->getData();
+            }
+            else{
+                return loadedP[1]->getData();
+            }
+        case 2:
+            if(loadedP[0]->getType()==2) {
+                if (getHealing() + prevHealth >= maxHealth) {
+                    return maxHealth;
+                } else {
+                    return getHealing() + loadedP[0]->getData();
+                }
+            }
+            else{
+                if (getHealing() + prevHealth >= maxHealth) {
+                    return maxHealth;
+                } else {
+                    return getHealing() + loadedP[1]->getData();
+                }
+            }
+        case 3:
             setAPrevEnemyD(prevEnemyD);
-            return getDamageEnemies();
+            if(loadedP[0]->getType()==3){
+                return loadedP[0]->getData();
+            }
+            else{
+                return loadedP[1]->getData();
+            }
         default:
             return -1;
     }
@@ -102,61 +125,42 @@ int Strategys::inMemory(char x,int prevHealth, int prevPlayerD, int prevEnemyD, 
 
 int Strategys::outOfMemory(char x,int prevHealth, int prevPlayerD, int prevEnemyD, int maxHealth) {
     char output;
-    if(x==unloadedP[0]){
-        output = loadedP[1];
-        unloadedP[0]=loadedP[1];
-        loadedP[1]= loadedP[0];
-        loadedP[0] = x;
+    if(x==0){
+        setAPrevPlayerD(prevPlayerD);
+        double data = reader(0);
+        InformationNode* tmpNode = new InformationNode(0,data);
+        loadedP[1]=loadedP[0];
+        loadedP[0]=tmpNode;
+        return getAPrevPlayerD() * loadedP[0]->getData();
+    }
+    else if(x==1){
+        setAPrevHealth(prevHealth);
+        int data = reader(1);
+        InformationNode* tmpNode = new InformationNode(1,data);
+        loadedP[1]=loadedP[0];
+        loadedP[0]=tmpNode;
+        return getAPrevPlayerD()*tmpNode->getData();
+    }
+    else if (x==2){
+        int data = reader(2);
+        InformationNode* tmpNode = new InformationNode(2,data);
+        loadedP[1]=loadedP[0];
+        loadedP[0]=tmpNode;
+        if(getHealing()+getAPrevHealth()>=maxHealth) {
+            return maxHealth;
+        }
+        else{
+            return loadedP[0]->getData() + getAPrevHealth();
+        }
     }
     else{
-        output = loadedP[1];
-        unloadedP[1]=loadedP[1];
-        loadedP[1]= loadedP[0];
-        loadedP[0] = x;
+        setAPrevEnemyD(prevEnemyD);
+        int data = reader(3);
+        InformationNode* tmpNode = new InformationNode(3,data);
+        loadedP[1]=loadedP[0];
+        loadedP[0]=tmpNode;
+        return loadedP[0]->getData();
     }
-    switch(output){
-        case 1:
-
-            setDamageincreased(0);
-            break;
-        case 2:
-
-            setShield(0);
-            break;
-        case 3:
-            setHealing(0);
-            break;
-        case 4:
-            setDamageEnemies(0);
-            break;
-        default:
-            return -1;
-    }
-    switch (x) {
-        case 1:
-            setAPrevPlayerD(prevPlayerD);
-            setDamageincreased(reader(1));
-            return getAPrevPlayerD()*getDamageincreased();
-        case 2:
-            setAPrevHealth(prevHealth);
-            setShield(reader(2));
-            return getShield();
-        case 3:
-            setHealing(reader(3));
-            if(getHealing()+getAPrevHealth()>=maxHealth) {
-                return getHealing();
-            }
-            else{
-                return getHealing() + getAPrevHealth();
-            }
-        case 4:
-            setAPrevEnemyD(prevEnemyD);
-            setDamageEnemies(reader(4));
-            return getDamageEnemies();
-        default:
-            return -1;
-    }
-
 }
 
 int Strategys::getAPrevHealth() {
@@ -185,23 +189,23 @@ void Strategys::setAPrevEnemyD(int prevEnemyD) {
 
 int Strategys::reader(char x){
     switch (x) {
-        case 1:
+        case 0:
             path = "RATATATA";
             break;
-        case 2:
+        case 1:
             path = "OCorona";
             break;
-        case 3:
+        case 2:
             path = "LaCuracao";
             break;
-        case 4:
+        case 3:
             path = "AmorYPaz";
             break;
         default:
             cout<<"caracter equivocado"<<endl;
     }
     ptree pt;
-    string fullPath = "/home/dadu/Documents/GitHub/Proyecto1Datos2CE_Server/" + path + ".xml";
+    string fullPath = "/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/" + path + ".xml";
     read_xml(fullPath,pt);
     int value;
     BOOST_FOREACH( boost::property_tree::ptree::value_type const& node, pt.get_child( path + ".Powers" ) )

@@ -29,7 +29,6 @@ void Waves::setGenDamage(int genDamage) {
 void Waves::insertShips(int numShips) {
     ShipEnemy* tempShip = new ShipEnemy();
     tempShip->setCode(0);
-
     setHead(tempShip);
     size ++;
     for(int i = 1; i<numShips;i++ ){
