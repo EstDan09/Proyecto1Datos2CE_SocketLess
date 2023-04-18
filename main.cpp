@@ -355,11 +355,25 @@ int main(int argc, const char * argv[])
                     boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
                 }
 
+                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(1, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(2, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
                 if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
                     inGame->getCurrentWave()->colShip(3, 500000);
                     char soundAction = 'S';
                     boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
                 }
+
+
 
 
 
@@ -1518,6 +1532,7 @@ int main(int argc, const char * argv[])
 
                 if (wave < 0) {
                     currentScreen = F6;
+                    wave = 4;
                 }
             }
             break;
@@ -1557,7 +1572,71 @@ int main(int argc, const char * argv[])
 
                 }
 
+
+                if (wave == 4) {
+                    char soundAction = '4';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 3) {
+                    char soundAction = '3';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 2) {
+                    char soundAction = '2';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 1) {
+                    char soundAction = '1';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 0) {
+                    char soundAction = '0';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
                 //Colisiones
+
+                //Enemigo sale bacano
+                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
+                    char soundAction = 'S';
+                    inGame->getCurrentWave()->colShip(0, 500000);
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(1, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(2, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(3, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(4, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(5, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
 
                 //BulletsOutOfBounds
                 if (player->getOutClipB1().x > 1470 && player->getOutClipB1().y < 1000){
@@ -3237,7 +3316,83 @@ int main(int argc, const char * argv[])
                     player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
                     player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
 
+                }if (wave == 4) {
+                    char soundAction = '4';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
                 }
+
+                if (wave == 3) {
+                    char soundAction = '3';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 2) {
+                    char soundAction = '2';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 1) {
+                    char soundAction = '1';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if (wave == 0) {
+                    char soundAction = '0';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                //Colisiones
+
+                //Enemigo sale bacano
+                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
+                    char soundAction = 'S';
+                    inGame->getCurrentWave()->colShip(0, 500000);
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(1, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(2, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(3, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(4, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(5, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy7->getOutclip().y < 1100 &&   (enemy7->getOutclip().x < -10 and enemy7->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(6, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+                if(enemy8->getOutclip().y < 1100 &&   (enemy8->getOutclip().x < -10 and enemy8->getOutclip().x > -15)){
+                    inGame->getCurrentWave()->colShip(7, 500000);
+                    char soundAction = 'S';
+                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+                }
+
+
 
                 //Colisiones
 
