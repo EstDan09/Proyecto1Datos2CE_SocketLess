@@ -9,11 +9,18 @@
 using namespace std;
 using boost::property_tree::ptree;
 /*
- * 1 = RATATATA
- * 2 = O Corona
- * 3 = La Curacao;
- * 4 = Amor Y Paz
+ * 0 = RATATATA
+ * 1 = O Corona
+ * 2 = La Curacao;
+ * 3 = Amor Y Paz
  */
+//shipPlayer->Ammunation.setDamage(strategys->activateP(0))
+//shipPlayer->Ammunation.setDamage(strategys->deActivateP(0))
+//shipPlayer->setVida(strategys->activateP(1))
+//shipPlayer->setVida(strategys->deActivateP(1))
+//shipPlayer->setVida(strategys->activateP(2))
+//inGame->currentWve->setDamage(strategys->activateP(3))
+//inGame->currentWve->setDamage(strategys->deActivateP(3))
 Strategys::Strategys() {
 
     Strategys::loadedP[0] = new InformationNode(0,2);
@@ -66,11 +73,11 @@ int Strategys::activateP(char x, int prevHealth, int prevPlayerD, int prevEnemyD
 
 int Strategys::deactivateP(char x) {
     switch (x) {
-        case 1:
+        case 0:
             return getAPrevPlayerD();
-        case 2:
+        case 1:
             return getAPrevHealth();
-        case 4:
+        case 3:
             return getAPrevEnemyD();
         default:
             return -1;
