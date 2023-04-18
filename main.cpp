@@ -3256,7 +3256,7 @@ int main(int argc, const char * argv[])
 
                 //Ver si paso de oleada
                 if (inGame->checkNextW()){
-                    wave++;
+                    wave--;
                     obj = 0;
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
@@ -3274,8 +3274,9 @@ int main(int argc, const char * argv[])
 
                 }
 
-                if (wave > 10) {
+                if (wave > 0) {
                     currentScreen = F11;
+                    wave = 4;
                 }
             }
             break;
@@ -5014,7 +5015,7 @@ int main(int argc, const char * argv[])
 
                 //Ver si paso de oleada
                 if (inGame->checkNextW()){
-                    wave++;
+                    wave--;
                     obj = 0;
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
@@ -5032,8 +5033,9 @@ int main(int argc, const char * argv[])
 
                 }
 
-                if(wave > 15){
+                if(wave < 0){
                     currentScreen = MENU;
+                    wave = 4;
                 }
             }
             break;
