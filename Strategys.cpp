@@ -205,7 +205,7 @@ int Strategys::reader(char x){
             cout<<"caracter equivocado"<<endl;
     }
     ptree pt;
-    string fullPath = "/home/dadu/Documents/GitHub/Proyecto1Datos2CE_SocketLess/" + path + ".xml";
+    string fullPath = "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets" + path + ".xml";
     read_xml(fullPath,pt);
     int value;
     BOOST_FOREACH( boost::property_tree::ptree::value_type const& node, pt.get_child( path + ".Powers" ) )

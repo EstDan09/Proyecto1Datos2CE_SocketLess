@@ -25,8 +25,8 @@ int bulletsCLeft = 0;
 int health = 100;
 int obj = 0;
 int wave = 1;
+string estadoPoder = "Waiting...";
 
-void logic1st();
 
 //Pantallas que voy a usar
 //------------------------------
@@ -72,6 +72,22 @@ int main(int argc, const char * argv[])
     ImageResize(&startHardButtonImage, 350, 200);
     Texture2D startHardButton = LoadTextureFromImage(startHardButtonImage);
 
+    Image ratataButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/ratata.png");
+    ImageResize(&ratataButtonImage, 75, 75);
+    Texture2D ratataButton = LoadTextureFromImage(ratataButtonImage);
+
+    Image shieldButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/shield.png");
+    ImageResize(&shieldButtonImage, 75, 75);
+    Texture2D shieldButton = LoadTextureFromImage(shieldButtonImage);
+
+    Image amorButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/amorYpaz.png");
+    ImageResize(&amorButtonImage, 75, 75);
+    Texture2D amorButton = LoadTextureFromImage(amorButtonImage);
+
+    Image curaButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/curacao.png");
+    ImageResize(&curaButtonImage, 75, 75);
+    Texture2D curaButton = LoadTextureFromImage(curaButtonImage);
+
 
     Image settingsButtonImage = LoadImage("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/settings.png");
     ImageResize(&settingsButtonImage, 100, 100);
@@ -104,6 +120,8 @@ int main(int argc, const char * argv[])
     auto* shipPlayer = new ShipPlayer(100);
     shipPlayer->ammunation->insertBullets(500);
     shipPlayer->ammunation->setDamage(101);
+
+    auto* strategiesMachine = new Strategys();
     //------------------------------
     auto* player = new Player (&shipUsableImage, raylib::Rectangle(40,8, 8,8),
                             raylib::Rectangle(100,GetScreenHeight()/2,64,64), 200.0f,
@@ -175,6 +193,26 @@ int main(int argc, const char * argv[])
     Rectangle startHardBottonBounds = { screenWidth/2.0f - startHardButton.width/2.0f, (screenHeight/2.0f) + 100,
                                         (float)startHardButton.width, frameHeightStartHard};
 
+    float frameHeightRatata = (float)ratataButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecRatata = {0,0, (float)ratataButton.width, frameHeightRatata};
+    Rectangle ratataButtonBounds = { 30, 75,
+                                        (float)ratataButton.width, frameHeightRatata};
+
+    float frameHeightShield = (float)shieldButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecShield = {0,0, (float)shieldButton.width, frameHeightShield};
+    Rectangle shieldButtonBounds = { screenWidth/2.0f - shieldButton.width/2.0f, (screenHeight/2.0f) + 100,
+                                     (float)shieldButton.width, frameHeightShield};
+
+    float frameHeightAmor = (float)amorButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecAmor = {0,0, (float)amorButton.width, frameHeightAmor};
+    Rectangle amorButtonBounds = { screenWidth/2.0f - amorButton.width/2.0f, (screenHeight/2.0f) + 100,
+                                     (float)amorButton.width, frameHeightAmor};
+
+    float frameHeightCura = (float)curaButton.height/NUM_FRAMES; //390
+    Rectangle sourceRecCura= {0,0, (float)curaButton.width, frameHeightCura};
+    Rectangle curaButtonBounds = { screenWidth/2.0f - amorButton.width/2.0f, (screenHeight/2.0f) + 100,
+                                   (float)curaButton.width, frameHeightCura};
+
     //------------------------------
 
     //Parametros del boton Settings
@@ -192,6 +230,7 @@ int main(int argc, const char * argv[])
     bool startButtonAction = false;
     bool startButtonActionEasy = false;
     bool startButtonActionHard = false;
+    bool ratataAction = false;
     int framesCounter = 0;
 
     SetTargetFPS(60);
@@ -296,6 +335,21 @@ int main(int argc, const char * argv[])
                 enemy3->Update();
                 enemy4->Update();
                 player->getOutClipB1();
+
+                mousePoint = GetMousePosition();
+                ratataAction = false;
+
+
+                if (CheckCollisionPointRec(mousePoint, ratataButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        ratataAction = true;
+                    }
+                }
+                if (ratataAction) {
+                    strategiesMachine->isLoaded()
+                    cout << "vamos" << endl;
+                    estadoPoder = "ratata";
+                }
 
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
@@ -5551,26 +5605,34 @@ int main(int argc, const char * argv[])
                 enemy2->Draw();
                 enemy3->Draw();
                 enemy4->Draw();
+                DrawTextureRec(ratataButton, sourceRecRatata, (Vector2){ratataButtonBounds.x, ratataButtonBounds.y}, WHITE);
 
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);
                 string bulletCounter = firstTextB + secondtextB;
                 DrawText(bulletCounter.c_str(), 0,0,30, GREEN);
 
-                string firstTextBC = "Bulletin the Kollector: ";
+                string firstTextBC = "Bullets in the Kollector: ";
                 string secondtextBC = to_string(bulletsCLeft);
                 string bulletCCounter = firstTextBC + secondtextBC;
-                DrawText(bulletCCounter.c_str(), 300,0,30, GREEN);
+                DrawText(bulletCCounter.c_str(), 220,0,30, GREEN);
 
                 string firstTextLives = "Lives: ";
                 string secondtextLives = to_string(lives);
                 string livesCounter = firstTextLives + secondtextLives;
-                DrawText(livesCounter.c_str(), 800,0,30, GREEN);
+                DrawText(livesCounter.c_str(), 640,0,30, GREEN);
 
                 string firstTextWaves = "Wave: ";
                 string secondTextWaves = to_string(wave);
                 string waveCounter = firstTextWaves + secondTextWaves;
-                DrawText(waveCounter.c_str(), 1200,0,30, GREEN);
+                DrawText(waveCounter.c_str(), 800,0,30, GREEN);
+
+                string firstTextPower = "Power: ";
+                string secondTextPower = estadoPoder;
+                string powerState = firstTextPower + secondTextPower;
+                DrawText(powerState.c_str(), 975,0,30, GREEN);
+
+
 
 
             }
@@ -5592,7 +5654,7 @@ int main(int argc, const char * argv[])
                 string bulletCounter = firstTextB + secondtextB;
                 DrawText(bulletCounter.c_str(), 0,0,30, GREEN);
 
-                string firstTextBC = "Bulletin the Kollector: ";
+                string firstTextBC = "Bullet in the Kollector: ";
                 string secondtextBC = to_string(bulletsCLeft);
                 string bulletCCounter = firstTextBC + secondtextBC;
                 DrawText(bulletCCounter.c_str(), 300,0,30, GREEN);
