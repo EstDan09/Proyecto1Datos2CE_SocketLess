@@ -226,3 +226,16 @@ int Strategys::reader(char x){
     return value;
 }
 
+bool Strategys::isLoaded(char x) {
+    bool value = false;
+    if(loadedP[0]->getType()==x){
+        value = true;
+        return value;
+    }
+    else if ( loadedP[1]->getType()==x){
+        value = true;
+        return value;
+    }
+    return value;
+}
+
