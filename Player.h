@@ -78,8 +78,6 @@ public:
     int getBulletsCLeft();
 
 
-
-
     void setDelay(float x);
     void ricoMauro();
 

@@ -59,6 +59,8 @@ public:
 
     int deactivateP(char x);
 
+    bool isLoaded(char x);
+
 private:
     int shield;
     int healing;
