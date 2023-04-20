@@ -17,22 +17,6 @@ public:
 
     void selectingS(char x);
 
-    int getShield() const;
-
-    void setShield(int shield);
-
-    int getHealing() const;
-
-    void setHealing(int healing);
-
-    int getDamageincreased() const;
-
-    void setDamageincreased(int damageincreased);
-
-    int getDamageEnemies() const;
-
-    void setDamageEnemies(int damageEnemies);
-
     InformationNode* loadedP[2];
 
     int activateP(char x, int prevHealth, int prevPlayerD, int prevEnemyD, int maxHealth);
@@ -62,10 +46,6 @@ public:
     bool isLoaded(char x);
 
 private:
-    int shield;
-    int healing;
-    int damageincreased;
-    int damageEnemies;
     int aPrevHealth;
     int aPrevPlayerD;
     int aPrevEnemyD;

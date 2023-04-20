@@ -51,16 +51,6 @@ bool BulletCollector::available() const{
         return true;
     }
 }
-void BulletCollector::showCol() const{
-    if(cHeadPtr != nullptr){
-        for(BulletD* temp = cHeadPtr; temp != nullptr; temp=temp->next){
-           cout << temp << endl;
-        }
-    }
-    else{
-        cout << "estoy empty :(" << endl;
-    }
-}
 
 int BulletCollector::getDamage(){
     return damage;

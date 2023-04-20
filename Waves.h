@@ -12,7 +12,6 @@ public:
 
     ~Waves();
 
-
     ShipEnemy *getHead() const;
 
     void setHead(ShipEnemy *nHead);
@@ -28,10 +27,9 @@ public:
     int size;
 
 private:
+
     int genDamage;
+
     ShipEnemy* head;
 };
-
-
-
 #endif //PROYECTO1DATOS2CE_SERVER_WAVES_H

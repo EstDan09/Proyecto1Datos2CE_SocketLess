@@ -29,8 +29,6 @@ public:
 
     void impact();
 
-    int countBullets();
-
     int getDamage();
 
     void setDamage(int damage);

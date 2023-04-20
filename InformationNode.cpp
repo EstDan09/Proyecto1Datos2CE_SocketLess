@@ -15,9 +15,6 @@ char InformationNode::getType() const {
     return type;
 }
 
-void InformationNode::setType(char type) {
-    InformationNode::type = type;
-}
 
 int InformationNode::getData() const {
     return data;

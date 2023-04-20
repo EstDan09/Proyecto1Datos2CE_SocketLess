@@ -17,8 +17,6 @@ public:
     BulletD* next;
 private:
     bool recycled;
-
-
 };
 
 

@@ -14,8 +14,6 @@ public:
 
     char getType() const;
 
-    void setType(char type);
-
     int getData() const;
 
     void setData(int data);

@@ -19,14 +19,6 @@ void ShipPlayer::setVida(int cVida) {
     ShipPlayer::vida = cVida;
 }
 
-const std::string &ShipPlayer::getSelecPower() const {
-    return selecPower;
-}
-
-void ShipPlayer::setSelecPower(const std::string nSelecPower) {
-    ShipPlayer::selecPower = nSelecPower;
-}
-
 bool ShipPlayer::isAlive(){
     if(vida<=0){
         return false;

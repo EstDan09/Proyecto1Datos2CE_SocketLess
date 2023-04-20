@@ -14,7 +14,6 @@ public:
     void insertF(BulletD* x);
     void deleteF();
     bool available() const;
-    void showCol() const;
 
     int getQuantity() const;
 

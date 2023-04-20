@@ -18,10 +18,6 @@ public:
 
     void setVida(int cVida);
 
-    const std::string &getSelecPower() const;
-
-    void setSelecPower(const std::string nSelecPower);
-
     bool isAlive();
 
     void setAlive(bool cAlive);
@@ -29,7 +25,6 @@ public:
     Ammunation* ammunation= new Ammunation();
 private:
     int vida;
-    std::string selecPower;
     bool alive;
 
 };

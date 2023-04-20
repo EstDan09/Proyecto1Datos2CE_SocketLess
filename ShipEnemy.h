@@ -28,14 +28,6 @@ public:
 
     void setAlive(bool cAlive);
 
-    std::string getPatreon();
-
-    void setPatreon(std::string nPatreon);
-
-    std::string getColour();
-
-    void setColour(std::string nColour);
-
     int getCode();
 
     void setCode(int code);
@@ -44,8 +36,6 @@ public:
 private:
     int vida;
     bool alive;
-    std::string patreon;
-    std::string colour;
     int code;
 
 };

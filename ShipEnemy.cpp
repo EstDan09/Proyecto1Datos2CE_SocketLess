@@ -33,19 +33,6 @@ bool ShipEnemy::isAlive(){
 void ShipEnemy::setAlive(bool cAlive) {
     ShipEnemy::alive = cAlive;
 }
-std::string ShipEnemy::getPatreon(){
-    return patreon;
-}
-
-void ShipEnemy::setPatreon(const std::string nPatreon) {
-    ShipEnemy::patreon = nPatreon;
-}
-std::string ShipEnemy::getColour() {
-    return colour;
-}
-void ShipEnemy::setColour(std::string nColour){
-    ShipEnemy::colour = nColour;
-}
 
 int ShipEnemy::getCode() {
     return code;

@@ -87,15 +87,6 @@ void Ammunation::impact(){
     }
 }
 
-int Ammunation::countBullets() {
-    int i =0;
-    BulletD* tmp = head;
-    while(tmp!= nullptr){
-        i++;
-        tmp=tmp->next;
-    }
-    return i;
-}
 
 int Ammunation::getDamage(){
     return damage;
@@ -105,10 +96,3 @@ void Ammunation::setDamage(int damage) {
     Ammunation::damage = damage;
 }
 
-bool Ammunation::isNoAmmunation() const {
-    return noAmmunation;
-}
-
-void Ammunation::setNoAmmunation(bool noAmmunation) {
-    Ammunation::noAmmunation = noAmmunation;
-}
