@@ -11,7 +11,7 @@
 class Enemy : public Entity{
 public:
     Enemy(raylib::Texture* texture, raylib::Rectangle inClip, raylib::Rectangle outClip, float speed,
-            raylib::Texture* textureForBullet, bool stop, int move);
+            raylib::Texture* textureForBullet, bool stop, int move, int cacho);
     ~Enemy();
     void Update();
     void Draw();
@@ -20,6 +20,7 @@ public:
     void setOutClip(raylib::Rectangle outClipNew);
     void setOutClipB(raylib::Rectangle outClipNew);
     int getMove();
+    void setCacho(int x);
 
 private:
     float speed;
@@ -28,6 +29,7 @@ private:
     bool stop;
     raylib::Rectangle outClipB;
     int move;
+    int cacho;
 
 };
 

@@ -12,6 +12,7 @@
 class Entity {
 public:
     Entity(raylib::Texture* texture, raylib::Rectangle inClip, raylib::Rectangle outClip);
+    ~Entity();
     virtual void Event();
     virtual void Update();
     virtual void Draw();

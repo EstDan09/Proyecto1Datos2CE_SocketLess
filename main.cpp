@@ -109,7 +109,7 @@ int main(int argc, const char * argv[])
     raylib::Texture backgroundImageF7 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF7.png");
     raylib::Texture backgroundImageF8 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF8.png");
     raylib::Texture backgroundImageF9 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF9.png");
-    raylib::Texture backgroundImageF10 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/bgF10.png");
+    raylib::Texture backgroundImageF10 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF10.png");
     raylib::Texture backgroundImageF11 = LoadTexture("/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets/bgF11.png");
     //------------------------------
 
@@ -129,28 +129,28 @@ int main(int argc, const char * argv[])
                             &bulletUsableImage, 3.0f);
     auto* enemy1 = new Enemy(&shipUsableImage, raylib::Rectangle(40,48,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, 200, 64,64), 200.0f,
-                            &bulletUsableImage, false, 0 + (rand() % 2));
+                            &bulletUsableImage, false, 0 + (rand() % 2), 1 + (rand() % 2));
     auto* enemy2 = new Enemy(&shipUsableImage, raylib::Rectangle(40,56,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, (GetScreenHeight()/2) + 35, 64,64), 200.0f,
-                            &bulletUsableImage, false, 0 + (rand() % 2));
+                            &bulletUsableImage, false, 0 + (rand() % 2), 1 + (rand() % 2));
     auto* enemy3 = new Enemy(&shipUsableImage, raylib::Rectangle(40,64,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, 700, 64,64), 200.0f,
-                            &bulletUsableImage, false, 0 + (rand() % 2));
+                            &bulletUsableImage, false, 0 + (rand() % 2),1 + (rand() % 2));
     auto* enemy4 = new Enemy(&shipUsableImage, raylib::Rectangle(40,72,8,8),
                             raylib::Rectangle(GetScreenWidth()-70,900, 64,64), 200.0f,
-                            &bulletUsableImage, false, 0 + (rand() % 2));
+                            &bulletUsableImage, false, 0 + (rand() % 2), 1 + (rand() % 2));
     auto* enemy5 = new Enemy(&shipUsableImage, raylib::Rectangle(48,72,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,550, 64,64), 200.0f,
-                             &bulletUsableImage, false, 0 + (rand() % 4));
+                             &bulletUsableImage, false, 0 + (rand() % 4), 1 + (rand() % 2));
     auto* enemy6 = new Enemy(&shipUsableImage, raylib::Rectangle(48,64,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,700, 64,64), 200.0f,
-                             &bulletUsableImage, false, 0 + (rand() % 4));
+                             &bulletUsableImage, false, 0 + (rand() % 4), 1 + (rand() % 2));
     auto* enemy7 = new Enemy(&shipUsableImage, raylib::Rectangle(48,56,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,800, 64,64), 200.0f,
-                             &bulletUsableImage, false, 0 + (rand() % 6));
+                             &bulletUsableImage, false, 0 + (rand() % 6), 1 + (rand() % 2));
     auto* enemy8 = new Enemy(&shipUsableImage, raylib::Rectangle(48,40,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,900, 64,64), 200.0f,
-                             &bulletUsableImage, false, 0 + (rand() % 6));
+                             &bulletUsableImage, false, 0 + (rand() % 6), 1 + (rand() % 2));
 
     auto* backgroundMenu = new Background(&backgroundImageMenu,raylib::Rectangle(200,100,1300, 1000),
                                           raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
@@ -163,16 +163,8 @@ int main(int argc, const char * argv[])
                                         raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
 
     //------------------------------
-//    player->setEnemy1(enemy1);
-//    player->setEnemy2(enemy1);
-//    player->setEnemy3(enemy1);
-//    player->setEnemy4(enemy1);
-//    player->setEnemy5(enemy1);
-//    player->setEnemy6(enemy6);
-//    player->setEnemy7(enemy7);
-//    player->setEnemy8(enemy8);
-//    player->setInGame(inGame);
-//    player->setShipPlayer(shipPlayer);
+
+
     //------------------------------
 
 
@@ -1685,12 +1677,16 @@ int main(int argc, const char * argv[])
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
                     enemy1->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy1->setCacho(3);
                     enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 300, 64,64));
                     enemy2->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy2->setCacho(3);
                     enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 400, 64,64));
                     enemy3->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy3->setCacho(3);
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy4->setCacho(3);
 
                 }
 
@@ -3528,16 +3524,22 @@ int main(int argc, const char * argv[])
                     player->setOutClip(raylib::Rectangle(100,GetScreenHeight()/2,64,64));
                     enemy1->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 200, 64,64));
                     enemy1->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy1->setCacho(4);
                     enemy2->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 300, 64,64));
                     enemy2->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy2->setCacho(4);
                     enemy3->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 400, 64,64));
                     enemy3->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy3->setCacho(4);
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy4->setCacho(4);
                     enemy5->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 650, 64,64));
                     enemy5->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy5->setCacho(4);
                     enemy6->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 900, 64,64));
                     enemy6->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    enemy6->setCacho(4);
 
                 }
 
