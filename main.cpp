@@ -163,16 +163,16 @@ int main(int argc, const char * argv[])
                                         raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
 
     //------------------------------
-    player->setEnemy1(enemy1);
-    player->setEnemy2(enemy1);
-    player->setEnemy3(enemy1);
-    player->setEnemy4(enemy1);
-    player->setEnemy5(enemy1);
-    player->setEnemy6(enemy6);
-    player->setEnemy7(enemy7);
-    player->setEnemy8(enemy8);
-    player->setInGame(inGame);
-    player->setShipPlayer(shipPlayer);
+//    player->setEnemy1(enemy1);
+//    player->setEnemy2(enemy1);
+//    player->setEnemy3(enemy1);
+//    player->setEnemy4(enemy1);
+//    player->setEnemy5(enemy1);
+//    player->setEnemy6(enemy6);
+//    player->setEnemy7(enemy7);
+//    player->setEnemy8(enemy8);
+//    player->setInGame(inGame);
+//    player->setShipPlayer(shipPlayer);
     //------------------------------
 
 
