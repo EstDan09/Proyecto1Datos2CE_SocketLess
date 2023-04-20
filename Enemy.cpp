@@ -5,8 +5,8 @@
 #include "Enemy.h"
 
 Enemy::Enemy(raylib::Texture *texture, raylib::Rectangle inClip, raylib::Rectangle outClip, float speed,
-               raylib::Texture* textureForBullet, bool stop)
-        : Entity(texture, inClip, outClip), speed(speed), shootingTime(0.0f), stop(stop){
+               raylib::Texture* textureForBullet, bool stop, int move)
+        : Entity(texture, inClip, outClip), speed(speed), shootingTime(0.0f), stop(stop), move(move){
     bullet = new Bullet(textureForBullet, raylib::Rectangle(56,40, 8,-8),
                    outClip, speed*(-4.0f), 0);
     shootingTime = 0;
@@ -39,9 +39,19 @@ void Enemy::Update() {
 
     }
     if (!stop){
-        outClip.x -= 1;
-        if (outClip.x < 0){
-            //stop
+        if (move == 0) {
+            outClip.x -= 1;
+        }
+
+        if (move != 0) {
+            outClip.x -= 1;
+            outClip.y += move;
+            if (outClip.y > 800 and outClip.y < 1800) {
+                move = -(move);
+            }
+            if (outClip.y < 15 and outClip.y < 1800) {
+                move = -(move);
+            }
         }
     }
 
@@ -71,4 +81,8 @@ raylib::Rectangle Enemy::getOutclipB() {
 
 void Enemy::setOutClipB(raylib::Rectangle outClipNew) {
     bullet->setOutClip(outClipNew);
+}
+
+int Enemy::getMove() {
+    return move;
 }

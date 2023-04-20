@@ -20,12 +20,11 @@
 using namespace std;
 
 int lives = 11;
-int fase1Con = 0;
 int bulletsLeft = 4;
 int bulletsCLeft = 0;
-int health = 100;
 int obj = 0;
 int wave = 1;
+
 string estadoPoder = "Waiting...";
 
 
@@ -130,28 +129,28 @@ int main(int argc, const char * argv[])
                             &bulletUsableImage, 3.0f);
     auto* enemy1 = new Enemy(&shipUsableImage, raylib::Rectangle(40,48,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, 200, 64,64), 200.0f,
-                            &bulletUsableImage, false);
+                            &bulletUsableImage, false, 0 + (rand() % 2));
     auto* enemy2 = new Enemy(&shipUsableImage, raylib::Rectangle(40,56,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, (GetScreenHeight()/2) + 35, 64,64), 200.0f,
-                            &bulletUsableImage, false);
+                            &bulletUsableImage, false, 0 + (rand() % 2));
     auto* enemy3 = new Enemy(&shipUsableImage, raylib::Rectangle(40,64,8,8),
                             raylib::Rectangle(GetScreenWidth()-70, 700, 64,64), 200.0f,
-                            &bulletUsableImage, false);
+                            &bulletUsableImage, false, 0 + (rand() % 2));
     auto* enemy4 = new Enemy(&shipUsableImage, raylib::Rectangle(40,72,8,8),
                             raylib::Rectangle(GetScreenWidth()-70,900, 64,64), 200.0f,
-                            &bulletUsableImage, false);
+                            &bulletUsableImage, false, 0 + (rand() % 2));
     auto* enemy5 = new Enemy(&shipUsableImage, raylib::Rectangle(48,72,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,550, 64,64), 200.0f,
-                             &bulletUsableImage, false);
+                             &bulletUsableImage, false, 0 + (rand() % 4));
     auto* enemy6 = new Enemy(&shipUsableImage, raylib::Rectangle(48,64,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,700, 64,64), 200.0f,
-                             &bulletUsableImage, false);
+                             &bulletUsableImage, false, 0 + (rand() % 4));
     auto* enemy7 = new Enemy(&shipUsableImage, raylib::Rectangle(48,56,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,800, 64,64), 200.0f,
-                             &bulletUsableImage, false);
+                             &bulletUsableImage, false, 0 + (rand() % 6));
     auto* enemy8 = new Enemy(&shipUsableImage, raylib::Rectangle(48,40,8,8),
                              raylib::Rectangle(GetScreenWidth()-70,900, 64,64), 200.0f,
-                             &bulletUsableImage, false);
+                             &bulletUsableImage, false, 0 + (rand() % 6));
 
     auto* backgroundMenu = new Background(&backgroundImageMenu,raylib::Rectangle(200,100,1300, 1000),
                                           raylib::Rectangle(0,0,screenWidth, screenHeight),0.0f);
@@ -342,7 +341,6 @@ int main(int argc, const char * argv[])
                 enemy4->Update();
                 player->getOutClipB1();
                 mousePoint = GetMousePosition();
-                cout << shipPlayer->ammunation->getDamage() << endl;
                 ratataAction = false;
                 shieldAction = false;
                 curacaoAction = false;
