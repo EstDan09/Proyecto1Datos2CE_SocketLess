@@ -200,17 +200,17 @@ int main(int argc, const char * argv[])
 
     float frameHeightShield = (float)shieldButton.height/NUM_FRAMES; //390
     Rectangle sourceRecShield = {0,0, (float)shieldButton.width, frameHeightShield};
-    Rectangle shieldButtonBounds = { screenWidth/2.0f - shieldButton.width/2.0f, (screenHeight/2.0f) + 100,
+    Rectangle shieldButtonBounds = { 30, 175,
                                      (float)shieldButton.width, frameHeightShield};
 
     float frameHeightAmor = (float)amorButton.height/NUM_FRAMES; //390
     Rectangle sourceRecAmor = {0,0, (float)amorButton.width, frameHeightAmor};
-    Rectangle amorButtonBounds = { screenWidth/2.0f - amorButton.width/2.0f, (screenHeight/2.0f) + 100,
+    Rectangle amorButtonBounds = { 30, 700,
                                      (float)amorButton.width, frameHeightAmor};
 
     float frameHeightCura = (float)curaButton.height/NUM_FRAMES; //390
     Rectangle sourceRecCura= {0,0, (float)curaButton.width, frameHeightCura};
-    Rectangle curaButtonBounds = { screenWidth/2.0f - amorButton.width/2.0f, (screenHeight/2.0f) + 100,
+    Rectangle curaButtonBounds = { 30, 800,
                                    (float)curaButton.width, frameHeightCura};
 
     //------------------------------
@@ -231,6 +231,9 @@ int main(int argc, const char * argv[])
     bool startButtonActionEasy = false;
     bool startButtonActionHard = false;
     bool ratataAction = false;
+    bool shieldAction = false;
+    bool curacao = false;
+    bool amorYpaz = false;
     int framesCounter = 0;
 
     SetTargetFPS(60);
@@ -338,6 +341,18 @@ int main(int argc, const char * argv[])
 
                 mousePoint = GetMousePosition();
                 ratataAction = false;
+                shieldAction = false;
+
+
+                //shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0)); quita ratata
+                //curacao
+                //shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100))
+                //shield
+                //shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100))
+                //shipPlayer->setVida(strategiesMachine->deactivateP(2)
+                //amorYpaz
+                //inGame->getCurrentWave()->setGenDamage(activateP(3,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100)))
+                //inGame->getCurrentWave()->setGenDamage(deactivateP(3)
 
 
                 if (CheckCollisionPointRec(mousePoint, ratataButtonBounds)) {
@@ -346,9 +361,30 @@ int main(int argc, const char * argv[])
                     }
                 }
                 if (ratataAction) {
-                    strategiesMachine->isLoaded()
-                    cout << "vamos" << endl;
-                    estadoPoder = "ratata";
+                    if (strategiesMachine->isLoaded(0)){
+                        estadoPoder = "ratata";
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        //timer
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, shieldButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        shieldAction = true;
+                    }
+                }
+                if (shieldAction) {
+                    if (strategiesMachine->isLoaded(0)){
+                        estadoPoder = "Coronao";
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        //timer
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
                 }
 
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
@@ -5606,6 +5642,10 @@ int main(int argc, const char * argv[])
                 enemy3->Draw();
                 enemy4->Draw();
                 DrawTextureRec(ratataButton, sourceRecRatata, (Vector2){ratataButtonBounds.x, ratataButtonBounds.y}, WHITE);
+                DrawTextureRec(shieldButton, sourceRecShield, (Vector2){shieldButtonBounds.x, shieldButtonBounds.y}, WHITE);
+                DrawTextureRec(amorButton, sourceRecAmor, (Vector2){amorButtonBounds.x, amorButtonBounds.y}, WHITE);
+                DrawTextureRec(curaButton, sourceRecCura, (Vector2){curaButtonBounds.x, curaButtonBounds.y}, WHITE);
+
 
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);
