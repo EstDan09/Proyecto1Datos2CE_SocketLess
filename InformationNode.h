@@ -21,6 +21,7 @@ public:
     void setData(int data);
 
 private:
+
     char type;
 
     int data;

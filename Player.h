@@ -81,8 +81,8 @@ public:
     void setDelay(float x);
     void ricoMauro();
 
-    boost::asio::io_service io;
-    boost::asio::serial_port  port = boost::asio::serial_port(io, "/dev/ttyACM0");
+//    boost::asio::io_service io;
+//    boost::asio::serial_port  port = boost::asio::serial_port(io, "/dev/ttyACM0");
 
 private:
     bool alive;

@@ -14,54 +14,15 @@ using boost::property_tree::ptree;
  * 2 = La Curacao;
  * 3 = Amor Y Paz
  */
-//shipPlayer->Ammunation.setDamage(strategys->activateP(0))
-//shipPlayer->Ammunation.setDamage(strategys->deActivateP(0))
-//shipPlayer->setVida(strategys->activateP(1))
-//shipPlayer->setVida(strategys->deActivateP(1))
-//shipPlayer->setVida(strategys->activateP(2))
-//inGame->currentWve->setDamage(strategys->activateP(3))
-//inGame->currentWve->setDamage(strategys->deActivateP(3))
+
 Strategys::Strategys() {
 
     Strategys::loadedP[0] = new InformationNode(0,2);
     Strategys::loadedP[1] = new InformationNode(1,1000000000);
-    //Strategys::damageincreased = 2;
-    //Strategys::shield = 10000000;
+
 }
 Strategys::~Strategys() {}
 
-
-int Strategys::getShield() const {
-    return shield;
-}
-
-void Strategys::setShield(int shield) {
-    Strategys::shield = shield;
-}
-
-int Strategys::getHealing() const {
-    return healing;
-}
-
-void Strategys::setHealing(int healing) {
-    Strategys::healing = healing;
-}
-
-int Strategys::getDamageincreased() const {
-    return damageincreased;
-}
-
-void Strategys::setDamageincreased(int damageincreased) {
-    Strategys::damageincreased = damageincreased;
-}
-
-int Strategys::getDamageEnemies() const {
-    return damageEnemies;
-}
-
-void Strategys::setDamageEnemies(int damageEnemies) {
-    Strategys::damageEnemies = damageEnemies;
-}
 int Strategys::activateP(char x, int prevHealth, int prevPlayerD, int prevEnemyD,  int maxHealth) {
     if(x==loadedP[0]->getType() || x==loadedP[1]->getType()){
         return inMemory(x, prevHealth, prevPlayerD, prevEnemyD, maxHealth);
@@ -104,17 +65,17 @@ int Strategys::inMemory(char x,int prevHealth, int prevPlayerD, int prevEnemyD, 
             }
         case 2:
             if(loadedP[0]->getType()==2) {
-                if (getHealing() + prevHealth >= maxHealth) {
+                if (25 + prevHealth >= maxHealth) {
                     return maxHealth;
                 } else {
-                    return getHealing() + loadedP[0]->getData();
+                    return getAPrevHealth() + loadedP[0]->getData();
                 }
             }
             else{
-                if (getHealing() + prevHealth >= maxHealth) {
+                if (25 + prevHealth >= maxHealth) {
                     return maxHealth;
                 } else {
-                    return getHealing() + loadedP[1]->getData();
+                    return getAPrevHealth() + loadedP[1]->getData();
                 }
             }
         case 3:
@@ -153,7 +114,7 @@ int Strategys::outOfMemory(char x,int prevHealth, int prevPlayerD, int prevEnemy
         InformationNode* tmpNode = new InformationNode(2,data);
         loadedP[1]=loadedP[0];
         loadedP[0]=tmpNode;
-        if(getHealing()+getAPrevHealth()>=maxHealth) {
+        if(loadedP[0]->getData()+getAPrevHealth()>=maxHealth) {
             return maxHealth;
         }
         else{
@@ -212,7 +173,7 @@ int Strategys::reader(char x){
             cout<<"caracter equivocado"<<endl;
     }
     ptree pt;
-    string fullPath = "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/assets" + path + ".xml";
+    string fullPath = "/home/esteban/CLionProjects/Proyecto1Datos2CE_Cliente/" + path + ".xml";
     read_xml(fullPath,pt);
     int value;
     BOOST_FOREACH( boost::property_tree::ptree::value_type const& node, pt.get_child( path + ".Powers" ) )

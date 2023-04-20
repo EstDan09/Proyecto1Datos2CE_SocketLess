@@ -59,61 +59,61 @@ Player::~Player(){
 
 void Player::Event() {
 
-    boost::asio::streambuf buffer;
-    boost::asio::read_until(port, buffer, '\n');
-    string message;
-    istream input_stream(&buffer);
-    getline(input_stream, message);
-    if(message.find("U") != string::npos){
-        inClip.y = 0;
-        outClip.y -= GetFrameTime() * speed;
-        if(outClip.y < 0) outClip.y = 0;
-    }
-    if(message.find("D") != string::npos){
-        inClip.y = 16;
-        outClip.y += GetFrameTime() * speed;
-        if(outClip.y > GetScreenHeight() - outClip.height) outClip.y = GetScreenHeight() - outClip.height;
-    }
-
-    if (message.find("0") != string::npos){
-        setDelay(9.0);
-    }
-
-    if (message.find("1") != string::npos){
-        setDelay(8.0);
-    }
-
-    if (message.find("2") != string::npos){
-        setDelay(7.0);
-    }
-
-    if (message.find("3") != string::npos){
-        setDelay(6.0);
-    }
-
-    if (message.find("4") != string::npos){
-        setDelay(5.0);
-    }
-
-    if (message.find("5") != string::npos){
-        setDelay(4.0);
-    }
-
-    if (message.find("6") != string::npos){
-        setDelay(3.0);
-    }
-
-    if (message.find("7") != string::npos){
-        setDelay(2.0);
-    }
-
-    if (message.find("8") != string::npos){
-        setDelay(1.5);
-    }
-
-    if (message.find("9") != string::npos){
-        setDelay(1.0);
-    }
+//    boost::asio::streambuf buffer;
+//    boost::asio::read_until(port, buffer, '\n');
+//    string message;
+//    istream input_stream(&buffer);
+//    getline(input_stream, message);
+//    if(message.find("U") != string::npos){
+//        inClip.y = 0;
+//        outClip.y -= GetFrameTime() * speed;
+//        if(outClip.y < 0) outClip.y = 0;
+//    }
+//    if(message.find("D") != string::npos){
+//        inClip.y = 16;
+//        outClip.y += GetFrameTime() * speed;
+//        if(outClip.y > GetScreenHeight() - outClip.height) outClip.y = GetScreenHeight() - outClip.height;
+//    }
+//
+//    if (message.find("0") != string::npos){
+//        setDelay(9.0);
+//    }
+//
+//    if (message.find("1") != string::npos){
+//        setDelay(8.0);
+//    }
+//
+//    if (message.find("2") != string::npos){
+//        setDelay(7.0);
+//    }
+//
+//    if (message.find("3") != string::npos){
+//        setDelay(6.0);
+//    }
+//
+//    if (message.find("4") != string::npos){
+//        setDelay(5.0);
+//    }
+//
+//    if (message.find("5") != string::npos){
+//        setDelay(4.0);
+//    }
+//
+//    if (message.find("6") != string::npos){
+//        setDelay(3.0);
+//    }
+//
+//    if (message.find("7") != string::npos){
+//        setDelay(2.0);
+//    }
+//
+//    if (message.find("8") != string::npos){
+//        setDelay(1.5);
+//    }
+//
+//    if (message.find("9") != string::npos){
+//        setDelay(1.0);
+//    }
 
 
 
@@ -282,9 +282,9 @@ void Player::setDelay(float x) {
     shootingDelay = x;
 }
 
-void Player::ricoMauro() {
-    port.set_option(boost::asio::serial_port_base::baud_rate(9600));
-}
+//void Player::ricoMauro() {
+//    port.set_option(boost::asio::serial_port_base::baud_rate(9600));
+//}
 
 void Player::setEnemy1(Enemy* x) {
     enemy1 = x;

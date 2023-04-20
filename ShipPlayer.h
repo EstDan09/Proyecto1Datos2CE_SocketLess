@@ -25,6 +25,7 @@ public:
     bool isAlive();
 
     void setAlive(bool cAlive);
+
     Ammunation* ammunation= new Ammunation();
 private:
     int vida;

@@ -11,12 +11,13 @@
 #include <boost/asio.hpp>
 #include <unistd.h>
 #include <string.h>
+#include "wait.h"
+#include "time.h"
 
 #include <string>
 #include "raylib.h"
 #define NUM_FRAMES 1 //recorte
 using namespace std;
-
 
 int lives = 11;
 int fase1Con = 0;
@@ -119,7 +120,7 @@ int main(int argc, const char * argv[])
     inGame->changeDifficulty(1);
     auto* shipPlayer = new ShipPlayer(100);
     shipPlayer->ammunation->insertBullets(500);
-    shipPlayer->ammunation->setDamage(101);
+    shipPlayer->ammunation->setDamage(1000);
 
     auto* strategiesMachine = new Strategys();
     //------------------------------
@@ -232,9 +233,10 @@ int main(int argc, const char * argv[])
     bool startButtonActionHard = false;
     bool ratataAction = false;
     bool shieldAction = false;
-    bool curacao = false;
-    bool amorYpaz = false;
+    bool curacaoAction = false;
+    bool amorYpazAction = false;
     int framesCounter = 0;
+    int pepe = 0;
 
     SetTargetFPS(60);
 
@@ -242,7 +244,7 @@ int main(int argc, const char * argv[])
 
     SetTargetFPS(60);
 
-    player->ricoMauro();
+//    player->ricoMauro();
 
     //Main loop del juego y cliente
     //------------------------------
@@ -276,6 +278,7 @@ int main(int argc, const char * argv[])
                     enemy3->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
                     enemy4->setOutClip(raylib::Rectangle(GetScreenWidth()-70, 500, 64,64));
                     enemy4->setOutClipB(raylib::Rectangle(-5, 500, 64,64));
+                    ratataAction = false;
                     obj = 0;
                     wave = 4;
                     shipPlayer->ammunation->insertBullets(500);
@@ -338,10 +341,13 @@ int main(int argc, const char * argv[])
                 enemy3->Update();
                 enemy4->Update();
                 player->getOutClipB1();
-
                 mousePoint = GetMousePosition();
+                cout << shipPlayer->ammunation->getDamage() << endl;
                 ratataAction = false;
                 shieldAction = false;
+                curacaoAction = false;
+                amorYpazAction = false;
+
 
 
                 //shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0)); quita ratata
@@ -349,10 +355,10 @@ int main(int argc, const char * argv[])
                 //shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100))
                 //shield
                 //shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100))
-                //shipPlayer->setVida(strategiesMachine->deactivateP(2)
+                //shipPlayer->setVida(strategiesMachine->deactivateP(1))
                 //amorYpaz
-                //inGame->getCurrentWave()->setGenDamage(activateP(3,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100)))
-                //inGame->getCurrentWave()->setGenDamage(deactivateP(3)
+                //inGame->getCurrentWave()->setGenDamage(activateP(3,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100))
+                //inGame->getCurrentWave()->setGenDamage(deactivateP(3))
 
 
                 if (CheckCollisionPointRec(mousePoint, ratataButtonBounds)) {
@@ -361,12 +367,17 @@ int main(int argc, const char * argv[])
                     }
                 }
                 if (ratataAction) {
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
                     if (strategiesMachine->isLoaded(0)){
                         estadoPoder = "ratata";
                         shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
                     }
                     else{
-                        //timer
+                        sleep(5);
+                        estadoPoder = "ratata";
                         shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
                     }
                 }
@@ -377,15 +388,80 @@ int main(int argc, const char * argv[])
                     }
                 }
                 if (shieldAction) {
-                    if (strategiesMachine->isLoaded(0)){
-                        estadoPoder = "Coronao";
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    if (strategiesMachine->isLoaded(1)){
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, curaButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        curacaoAction = true;
+                    }
+                }
+                if (curacaoAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(2)){
+                        estadoPoder = "Curacao";
                         shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
                     }
                     else{
-                        //timer
+                        sleep(5);
+                        estadoPoder = "Curacao";
                         shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
                     }
                 }
+
+                if (CheckCollisionPointRec(mousePoint, amorButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        amorYpazAction = true;
+                        pepe = 0;
+                    }
+                }
+                if (amorYpazAction) {
+
+                        shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                        shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(3)) {
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                                                            shipPlayer->ammunation->getDamage(),
+                                                                                            inGame->getCurrentWave()->getGenDamage(),
+                                                                                            100));
+                    } else {
+                        sleep(5);
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(
+                                    strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                                 shipPlayer->ammunation->getDamage(),
+                                                                 inGame->getCurrentWave()->getGenDamage(), 100));
+
+                    }
+
+                }
+
+
+
 
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
@@ -409,59 +485,59 @@ int main(int argc, const char * argv[])
 
                 }
 
-                if (wave == 4) {
-                    char soundAction = '4';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 3) {
-                    char soundAction = '3';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 2) {
-                    char soundAction = '2';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 1) {
-                    char soundAction = '1';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 0) {
-                    char soundAction = '0';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
+//                if (wave == 4) {
+//                    char soundAction = '4';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 3) {
+//                    char soundAction = '3';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 2) {
+//                    char soundAction = '2';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 1) {
+//                    char soundAction = '1';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 0) {
+//                    char soundAction = '0';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
 
 
 
                 //Colisiones
 
                     //Enemigo sale bacano
-                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
-                    char soundAction = 'S';
-                    inGame->getCurrentWave()->colShip(0, 500000);
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(1, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(2, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(3, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
+//                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
+//                    char soundAction = 'S';
+//                    inGame->getCurrentWave()->colShip(0, 500000);
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(1, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(2, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(3, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
 
 
 
@@ -1637,8 +1713,111 @@ int main(int argc, const char * argv[])
                 enemy5->Update();
                 enemy6->Update();
                 player->getOutClipB1();
+                ratataAction = false;
+                shieldAction = false;
+                curacaoAction = false;
+                amorYpazAction = false;
 
                 cout << inGame->checkNextW() << endl;
+
+                if (CheckCollisionPointRec(mousePoint, ratataButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        ratataAction = true;
+                    }
+                }
+                if (ratataAction) {
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    if (strategiesMachine->isLoaded(0)){
+                        estadoPoder = "ratata";
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "ratata";
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, shieldButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        shieldAction = true;
+                    }
+                }
+                if (shieldAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    if (strategiesMachine->isLoaded(1)){
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, curaButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        curacaoAction = true;
+                    }
+                }
+                if (curacaoAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(2)){
+                        estadoPoder = "Curacao";
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "Curacao";
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, amorButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        amorYpazAction = true;
+                        pepe = 0;
+                    }
+                }
+                if (amorYpazAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(3)) {
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                                                            shipPlayer->ammunation->getDamage(),
+                                                                                            inGame->getCurrentWave()->getGenDamage(),
+                                                                                            100));
+                    } else {
+                        sleep(5);
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(
+                                strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                             shipPlayer->ammunation->getDamage(),
+                                                             inGame->getCurrentWave()->getGenDamage(), 100));
+
+                    }
+
+                }
 
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
@@ -1663,69 +1842,69 @@ int main(int argc, const char * argv[])
                 }
 
 
-                if (wave == 4) {
-                    char soundAction = '4';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 3) {
-                    char soundAction = '3';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 2) {
-                    char soundAction = '2';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 1) {
-                    char soundAction = '1';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 0) {
-                    char soundAction = '0';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                //Colisiones
-
-                //Enemigo sale bacano
-                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
-                    char soundAction = 'S';
-                    inGame->getCurrentWave()->colShip(0, 500000);
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(1, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(2, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(3, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(4, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(5, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
+//                if (wave == 4) {
+//                    char soundAction = '4';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 3) {
+//                    char soundAction = '3';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 2) {
+//                    char soundAction = '2';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 1) {
+//                    char soundAction = '1';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 0) {
+//                    char soundAction = '0';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                //Colisiones
+//
+//                //Enemigo sale bacano
+//                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
+//                    char soundAction = 'S';
+//                    inGame->getCurrentWave()->colShip(0, 500000);
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(1, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(2, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(3, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(4, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(5, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
 
 
                 //BulletsOutOfBounds
@@ -3382,10 +3561,114 @@ int main(int argc, const char * argv[])
                 enemy6->Update();
                 enemy7->Update();
                 enemy8->Update();
+                ratataAction = false;
+                shieldAction = false;
+                curacaoAction = false;
+                amorYpazAction = false;
 
                 player->getOutClipB1();
 
                 cout << inGame->checkNextW() << endl;
+
+                if (CheckCollisionPointRec(mousePoint, ratataButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        ratataAction = true;
+                    }
+                }
+                if (ratataAction) {
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    if (strategiesMachine->isLoaded(0)){
+                        estadoPoder = "ratata";
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "ratata";
+                        shipPlayer->ammunation->setDamage(strategiesMachine->activateP(0,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, shieldButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        shieldAction = true;
+                    }
+                }
+                if (shieldAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    if (strategiesMachine->isLoaded(1)){
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "O Corona";
+                        shipPlayer->setVida(strategiesMachine->activateP(1,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, curaButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        curacaoAction = true;
+                    }
+                }
+                if (curacaoAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    inGame->getCurrentWave()->setGenDamage(strategiesMachine->deactivateP(3));
+
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(2)){
+                        estadoPoder = "Curacao";
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+                    }
+                    else{
+                        sleep(5);
+                        estadoPoder = "Curacao";
+                        shipPlayer->setVida(strategiesMachine->activateP(2,shipPlayer->getVida(),shipPlayer->ammunation->getDamage(),inGame->getCurrentWave()->getGenDamage(),100));
+
+                    }
+                }
+
+                if (CheckCollisionPointRec(mousePoint, amorButtonBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+                        amorYpazAction = true;
+                        pepe = 0;
+                    }
+                }
+                if (amorYpazAction) {
+
+                    shipPlayer->ammunation->setDamage(strategiesMachine->deactivateP(0));
+
+                    shipPlayer->setVida(strategiesMachine->deactivateP(1));
+
+                    if (strategiesMachine->isLoaded(3)) {
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                                                            shipPlayer->ammunation->getDamage(),
+                                                                                            inGame->getCurrentWave()->getGenDamage(),
+                                                                                            100));
+                    } else {
+                        sleep(5);
+                        estadoPoder = "Amor Y Paz";
+                        inGame->getCurrentWave()->setGenDamage(
+                                strategiesMachine->activateP(3, shipPlayer->getVida(),
+                                                             shipPlayer->ammunation->getDamage(),
+                                                             inGame->getCurrentWave()->getGenDamage(), 100));
+
+                    }
+
+                }
+
 
                 bulletsLeft = shipPlayer->ammunation->getQuantity();
                 if (lives <= 0){
@@ -3407,81 +3690,82 @@ int main(int argc, const char * argv[])
                     player->setOutClipB9(raylib::Rectangle(0,1100, 32,32));
                     player->setOutClipB10(raylib::Rectangle(0,1100, 32,32));
 
-                }if (wave == 4) {
-                    char soundAction = '4';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
                 }
-
-                if (wave == 3) {
-                    char soundAction = '3';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 2) {
-                    char soundAction = '2';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 1) {
-                    char soundAction = '1';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if (wave == 0) {
-                    char soundAction = '0';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                //Colisiones
-
-                //Enemigo sale bacano
-                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
-                    char soundAction = 'S';
-                    inGame->getCurrentWave()->colShip(0, 500000);
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(1, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(2, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(3, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(4, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(5, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy7->getOutclip().y < 1100 &&   (enemy7->getOutclip().x < -10 and enemy7->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(6, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
-
-                if(enemy8->getOutclip().y < 1100 &&   (enemy8->getOutclip().x < -10 and enemy8->getOutclip().x > -15)){
-                    inGame->getCurrentWave()->colShip(7, 500000);
-                    char soundAction = 'S';
-                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
-                }
+//                if (wave == 4) {
+//                    char soundAction = '4';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 3) {
+//                    char soundAction = '3';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 2) {
+//                    char soundAction = '2';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 1) {
+//                    char soundAction = '1';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if (wave == 0) {
+//                    char soundAction = '0';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                //Colisiones
+//
+//                //Enemigo sale bacano
+//                if(enemy1->getOutclip().y < 1100 &&   (enemy1->getOutclip().x < -10 and enemy1->getOutclip().x > -15)){
+//                    char soundAction = 'S';
+//                    inGame->getCurrentWave()->colShip(0, 500000);
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy2->getOutclip().y < 1100 &&   (enemy2->getOutclip().x < -10 and enemy2->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(1, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy3->getOutclip().y < 1100 &&   (enemy3->getOutclip().x < -10 and enemy3->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(2, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy4->getOutclip().y < 1100 &&   (enemy4->getOutclip().x < -10 and enemy4->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(3, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy5->getOutclip().y < 1100 &&   (enemy5->getOutclip().x < -10 and enemy5->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(4, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy6->getOutclip().y < 1100 &&   (enemy6->getOutclip().x < -10 and enemy6->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(5, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy7->getOutclip().y < 1100 &&   (enemy7->getOutclip().x < -10 and enemy7->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(6, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
+//
+//                if(enemy8->getOutclip().y < 1100 &&   (enemy8->getOutclip().x < -10 and enemy8->getOutclip().x > -15)){
+//                    inGame->getCurrentWave()->colShip(7, 500000);
+//                    char soundAction = 'S';
+//                    boost::asio::write(player->port, boost::asio::buffer(&soundAction, 1));
+//                }
 
 
 
@@ -5646,7 +5930,6 @@ int main(int argc, const char * argv[])
                 DrawTextureRec(amorButton, sourceRecAmor, (Vector2){amorButtonBounds.x, amorButtonBounds.y}, WHITE);
                 DrawTextureRec(curaButton, sourceRecCura, (Vector2){curaButtonBounds.x, curaButtonBounds.y}, WHITE);
 
-
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);
                 string bulletCounter = firstTextB + secondtextB;
@@ -5688,6 +5971,10 @@ int main(int argc, const char * argv[])
                 enemy4->Draw();
                 enemy5->Draw();
                 enemy6->Draw();
+                DrawTextureRec(ratataButton, sourceRecRatata, (Vector2){ratataButtonBounds.x, ratataButtonBounds.y}, WHITE);
+                DrawTextureRec(shieldButton, sourceRecShield, (Vector2){shieldButtonBounds.x, shieldButtonBounds.y}, WHITE);
+                DrawTextureRec(amorButton, sourceRecAmor, (Vector2){amorButtonBounds.x, amorButtonBounds.y}, WHITE);
+                DrawTextureRec(curaButton, sourceRecCura, (Vector2){curaButtonBounds.x, curaButtonBounds.y}, WHITE);
 
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);
@@ -5723,6 +6010,10 @@ int main(int argc, const char * argv[])
                 enemy6->Draw();
                 enemy7->Draw();
                 enemy8->Draw();
+                DrawTextureRec(ratataButton, sourceRecRatata, (Vector2){ratataButtonBounds.x, ratataButtonBounds.y}, WHITE);
+                DrawTextureRec(shieldButton, sourceRecShield, (Vector2){shieldButtonBounds.x, shieldButtonBounds.y}, WHITE);
+                DrawTextureRec(amorButton, sourceRecAmor, (Vector2){amorButtonBounds.x, amorButtonBounds.y}, WHITE);
+                DrawTextureRec(curaButton, sourceRecCura, (Vector2){curaButtonBounds.x, curaButtonBounds.y}, WHITE);
 
                 string firstTextB = "Bullets: ";
                 string secondtextB = to_string(bulletsLeft);

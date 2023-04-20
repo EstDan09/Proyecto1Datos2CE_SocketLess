@@ -35,10 +35,6 @@ public:
 
     void setDamage(int damage);
 
-    bool isNoAmmunation() const;
-
-    void setNoAmmunation(bool noAmmunation);
-
 
 
 private:
